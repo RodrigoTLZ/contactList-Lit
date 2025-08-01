@@ -31,9 +31,10 @@ export class EliminarPopup extends LitElement {
         gap:10px;
     }
 
-    .confirm:hover {
+    .confirm{
         background-color: red;
         color: white;
+    }
   `;
 
   _confirm() {
