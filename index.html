@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="./components/header.js"></script>
+    <script type="module" src="./components/toolbar.js" data-shoelace="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/"></script>
+    <script type="module" src="./components/contactList.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
+
+    <style>
+      body,html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+      .container {
+        flex: 1;
+        padding: 20px;
+        background-color:#F5F5F5 ;
+      }
+
+      .inicio {
+         display: flex;
+        flex: 1;
+        height: calc(100vh - 80px);
+      }
+    </style>
+    <title>Lista de Contactos</title>
+  </head>
+
+  <body>
+   <header-component></header-component>
+    <div class="inicio">
+        <toolbar-component></toolbar-component>
+        <div class="container">
+        <contactlist-component></contactlist-component>
+    </div>
+    </div>
+  </body>
+</html>
