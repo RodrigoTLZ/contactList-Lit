@@ -5,6 +5,7 @@ export class AddContactPopup extends LitElement {
     name: { type: String },
     email: { type: String },
     phone: { type: String },
+    message: { type: String },
   };
 
   static styles = css`
@@ -13,33 +14,39 @@ export class AddContactPopup extends LitElement {
       border-radius: 8px;
       padding: 2rem;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-      width: 40%;
-      height: 60%;
+      width: 40vw;
+      height: 68vh;
     }
     .buttons {
       display: flex;
       justify-content: center;
-      gap: 10px;
-
+      gap: 20px;
       margin-top: 20px;
     }
 
     h2 {
       font-size: 1.8em;
-      margin-bottom: 3.5rem;
     }
 
-    label{
-        font-size: 1.1em;
-        font-weight:semibold;
+    label {
+      font-size: 1em;
+      font-weight: bold;
+    }
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
     }
 
     button {
-      padding: 0.5rem 1rem;
+      padding: 0.7rem 1.2rem;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       font-size: 1em;
+      width: 30%;
     }
 
     #add {
@@ -51,19 +58,27 @@ export class AddContactPopup extends LitElement {
       border-radius: 10px;
       border: 0.5px solid #ccc;
       width: 100%;
-      margin-bottom: 1rem;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
-      height: 1.5rem;
+      padding: 0.6rem;
+      box-sizing: border-box;
     }
 
     input:focus {
       outline: none;
     }
 
-    .title{
-        display: flex;
-        justify-content: center;
+    .title {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    #phone-input {
+      margin-bottom: 0.6rem;
+    }
+
+    #message {
+      color: red;
+      font-size: 0.9em;
     }
   `;
 
@@ -72,6 +87,7 @@ export class AddContactPopup extends LitElement {
     this.name = "";
     this.email = "";
     this.phone = "";
+    this.message = "";
   }
 
   render() {
@@ -106,7 +122,10 @@ export class AddContactPopup extends LitElement {
             .value="${this.phone}"
             @input="${(e) => (this.phone = e.target.value)}"
             required
+            id="phone-input"
           />
+
+          <label id="message">${this.message}</label>
           <div class="buttons">
             <button type="button" @click="${this._cancelContact}">
               Cancelar
@@ -122,6 +141,7 @@ export class AddContactPopup extends LitElement {
     this.name = "";
     this.email = "";
     this.phone = "";
+    this.message = "";
     this.dispatchEvent(
       new CustomEvent("cancelContact", { bubbles: true, composed: true })
     );
@@ -129,6 +149,18 @@ export class AddContactPopup extends LitElement {
 
   _addContact(e) {
     e.preventDefault();
+
+    const telephoneValidator = /^\d+$/.test(this.phone);
+
+    if (this.name === "" || this.email === "" || this.phone === "") {
+      this.message = "Debe rellenar todos los campos.";
+      return;
+    }
+    else if (!telephoneValidator){
+      this.message = "El número de teléfono debe contener solo dígitos.";
+      this.phone = "";
+      return;
+    }
     this.dispatchEvent(
       new CustomEvent(
         "addContact",
@@ -145,6 +177,7 @@ export class AddContactPopup extends LitElement {
     this.name = "";
     this.email = "";
     this.phone = "";
+    this.message = "";
   }
 }
 
