@@ -89,7 +89,14 @@ export class ListaContactos extends LitElement {
   border: none;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    
+  #floating-button:hover{
+    background-color: #161179;
+  }
   `;
+
 
   constructor() {
     super();

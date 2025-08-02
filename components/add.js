@@ -156,8 +156,8 @@ export class AddContactPopup extends LitElement {
       this.message = "Debe rellenar todos los campos.";
       return;
     }
-    else if (!telephoneValidator){
-      this.message = "El número de teléfono debe contener solo dígitos.";
+    else if (!telephoneValidator || this.phone.length < 10) {
+      this.message = "El número de teléfono debe contener solo dígitos y mínimo 10.";
       this.phone = "";
       return;
     }
